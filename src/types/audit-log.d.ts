@@ -1,0 +1,3 @@
+interface AuditLog {
+  id: string;
+}
