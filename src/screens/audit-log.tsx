@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Alert, Box, Container, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { format } from 'date-fns';
 
@@ -28,22 +28,34 @@ const columns: GridColDef[] = [
 ];
 
 export default function AuditLog() {
-  const { data } = useGetAuditLogs();
+  const { data, isError } = useGetAuditLogs();
+
+  if (isError) {
+    return (
+      <Alert severity="error">
+        Sorry! We have hit an error! Please try again
+      </Alert>
+    );
+  }
 
   return (
     <Layout>
       <Container>
-        <Box mt={8} height={400} width="100%">
-          <DataGrid
-            rows={data || []}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            getRowId={row => row.siteId}
-          />
-        </Box>
+        {data && data.length ? (
+          <Box mt={8} height={400} width="100%">
+            <DataGrid
+              rows={data || []}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              checkboxSelection
+              disableSelectionOnClick
+              getRowId={row => row.siteId}
+            />
+          </Box>
+        ) : (
+          <Typography>No data found!</Typography>
+        )}
       </Container>
     </Layout>
   );
