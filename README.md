@@ -7,20 +7,19 @@
 - MockJS
 - React Testing Library
 - TypeScript
-- Framer Motion
 
 ### Install & Run
 
 1.  First clone the repo:
 
 ```bash
-$ git clone git@github.com:mbmohib/radio-app.git
+$ git clone git@github.com:mbmohib/audit-log.git
 ```
 
 2.  Then go to the folder:
 
 ```bash
-$ cd radio-app
+$ cd audit-log
 ```
 
 3.  Then install the dependencies:
