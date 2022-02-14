@@ -1,6 +1,6 @@
 interface AuditLog {
   siteId: string;
   userId: string;
-  eventName: string;
+  eventName: 'INSERT' | 'MODIFY' | 'REMOVE';
   timestamp: string;
 }
