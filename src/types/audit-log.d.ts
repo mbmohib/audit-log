@@ -1,3 +1,6 @@
 interface AuditLog {
-  id: string;
+  siteId: string;
+  userId: string;
+  eventName: string;
+  timestamp: string;
 }
