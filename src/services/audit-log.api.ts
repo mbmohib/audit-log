@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 import { useAxios } from '../hooks';
 
-export const useGetRadios = () => {
+export const useGetAuditLogs = () => {
   const axios = useAxios();
 
   return useQuery<AuditLog[], Error>(

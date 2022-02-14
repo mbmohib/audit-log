@@ -3,7 +3,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { format } from 'date-fns';
 
 import { Layout } from '../components';
-import { auditLogs } from '../mocks/db/audit-log.db';
+import { useGetAuditLogs } from '../services/audit-log.api';
 
 const columns: GridColDef[] = [
   { field: 'siteId', headerName: 'Site ID', width: 150 },
@@ -28,12 +28,14 @@ const columns: GridColDef[] = [
 ];
 
 export default function AuditLog() {
+  const { data } = useGetAuditLogs();
+
   return (
     <Layout>
       <Container>
         <Box mt={8} height={400} width="100%">
           <DataGrid
-            rows={auditLogs}
+            rows={data || []}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
