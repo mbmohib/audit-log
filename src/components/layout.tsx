@@ -1,6 +1,23 @@
-import Box from '@mui/material/Box';
+import styled from 'styled-components';
 
-import { Footer, Header } from '.';
+import { Header, Sidebar } from '.';
+import { sidebarSize } from '../config';
+
+const LayoutWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const Content = styled.div`
+  flex-grow: 1;
+  margin-top: 8px;
+  margin-left: 200px;
+  width: calc(100% - ${sidebarSize});
+  padding-left: 16px;
+  padding-right: 16px;
+`;
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,17 +25,12 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <Box
-      display="flex"
-      minHeight="100vh"
-      alignItems="center"
-      flexDirection="column"
-    >
-      <Header />
-      <Box flexGrow="1" width="100%" mt={6}>
+    <LayoutWrapper>
+      <Sidebar />
+      <Content>
+        <Header />
         {children}
-      </Box>
-      <Footer />
-    </Box>
+      </Content>
+    </LayoutWrapper>
   );
 }

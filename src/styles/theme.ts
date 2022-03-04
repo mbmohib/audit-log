@@ -1,19 +1,12 @@
-import { red } from '@mui/material/colors';
-import { createTheme } from '@mui/material/styles';
+import { DefaultTheme } from 'styled-components';
 
-// A custom theme for this app
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#556cd6',
-    },
-    secondary: {
-      main: '#19857b',
-    },
-    error: {
-      main: red.A400,
-    },
+const theme: DefaultTheme = {
+  colors: {
+    primary: '#3751FF',
+    secondary: '#363740',
+    body: '#F7F8FC',
+    black: '#252733',
   },
-});
+};
 
 export default theme;
