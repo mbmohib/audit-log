@@ -39,24 +39,22 @@ export default function AuditLog() {
   }
 
   return (
-    <Layout>
-      <Container>
-        {data && data.length ? (
-          <Box mt={8} height={400} width="100%">
-            <DataGrid
-              rows={data || []}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              checkboxSelection
-              disableSelectionOnClick
-              getRowId={row => row.siteId}
-            />
-          </Box>
-        ) : (
-          <Typography>No data found!</Typography>
-        )}
-      </Container>
-    </Layout>
+    <Container>
+      {data && data.length ? (
+        <Box mt={8} height={400} width="100%">
+          <DataGrid
+            rows={data || []}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+            getRowId={row => row.siteId}
+          />
+        </Box>
+      ) : (
+        <Typography>No data found!</Typography>
+      )}
+    </Container>
   );
 }

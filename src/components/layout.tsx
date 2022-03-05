@@ -13,7 +13,7 @@ const LayoutWrapper = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   margin-top: 8px;
-  margin-left: 200px;
+  margin-left: ${sidebarSize};
   width: calc(100% - ${sidebarSize});
   padding-left: 16px;
   padding-right: 16px;

@@ -8,7 +8,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: ${props => props.theme.colors.body};
+    background-color: ${({ theme }) => theme.colors.tertiary100};
+    color: ${({ theme }) => theme.colors.black};
     font-size: 16px;
     line-height: 1.5;
     font-family: 'Roboto', sans-serif;
