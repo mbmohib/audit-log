@@ -1,7 +1,19 @@
 import { DefaultTheme } from 'styled-components';
 
+export const breakpointsRule = {
+  _: 600,
+  sm: 768,
+  md: 1024,
+  lg: 1280,
+  xl: 1536,
+};
+
+export const breakpoints = ['600px', '768px', '1024px', '1280px', '1536px'];
+
 const theme: DefaultTheme = {
-  primaryFont: '"Roboto Mono", monospace',
+  space: [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 100],
+  breakpoints,
+  primaryFont: "'Roboto', sans-serif",
   typeScale: {
     header1: '1.8rem',
     header2: '1.6rem',

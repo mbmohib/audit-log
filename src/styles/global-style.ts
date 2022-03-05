@@ -12,6 +12,6 @@ export default createGlobalStyle`
     color: ${({ theme }) => theme.colors.black};
     font-size: 16px;
     line-height: 1.5;
-    font-family: 'Roboto', sans-serif;
+    font-family:  ${({ theme }) => theme.primaryFont};
   }
 `;

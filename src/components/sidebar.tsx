@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Image } from '.';
+import { Image, Typography } from '.';
 import logo from '../assets/images/logo.png';
-import { sidebarSize } from '../config';
+import { sideMenus, sidebarSize } from '../config';
 
 const SidebarWrapper = styled.aside`
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -35,6 +35,10 @@ const NavItem = styled(NavLink)`
   :hover {
     color: ${({ theme }) => theme.colors.tertiary200};
   }
+
+  &.active {
+    color: ${({ theme }) => theme.colors.tertiary200};
+  }
 `;
 
 export default function Sidebar() {
@@ -42,17 +46,18 @@ export default function Sidebar() {
     <SidebarWrapper>
       <Header>
         <Image src={logo} alt="logo" />
-        <p>Dashboard</p>
+        <Typography fontWeight={600}>Dashboard</Typography>
       </Header>
 
       <Nav>
-        <NavItem
-          className={({ isActive }) => (isActive ? 'active' : 'undefined')}
-          to="/forms"
-        >
-          Forms
-        </NavItem>
-        <NavItem to="/audit-logs">Audit Logs</NavItem>
+        {sideMenus.map(menu => (
+          <NavItem
+            className={({ isActive }) => (isActive ? 'active' : 'undefined')}
+            to={menu.path}
+          >
+            {menu.label}
+          </NavItem>
+        ))}
       </Nav>
     </SidebarWrapper>
   );

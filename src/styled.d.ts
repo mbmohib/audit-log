@@ -2,6 +2,8 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    space: number[];
+    breakpoints: string[];
     primaryFont: string;
     typeScale: {
       header1: string;

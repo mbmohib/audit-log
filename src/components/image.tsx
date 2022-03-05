@@ -1,8 +1,18 @@
-type ImageProps = {
-  src: string;
-  alt?: string;
-};
+import styled from 'styled-components';
+import { LayoutProps, SpaceProps, layout, space } from 'styled-system';
 
-export default function Image({ src, alt }: ImageProps) {
-  return <img src={src} alt={alt} />;
-}
+type ImageProps = SpaceProps &
+  LayoutProps & {
+    src: string;
+    alt?: string;
+  };
+
+const Image = styled.img<ImageProps>`
+  max-width: 100%;
+  display: block;
+
+  ${layout}
+  ${space}
+`;
+
+export default Image;
