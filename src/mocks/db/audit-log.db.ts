@@ -1,6 +1,6 @@
 import { build, fake, oneOf, sequence } from '@jackfranklin/test-data-bot';
 
-export const auditLogBuilder = build('Pages', {
+export const auditLogBuilder = build('AuditLog', {
   fields: {
     siteId: sequence(),
     userId: sequence(),

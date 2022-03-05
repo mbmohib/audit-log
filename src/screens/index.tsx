@@ -1,2 +1,2 @@
 export { default as AuditLog } from './audit-log';
-export { default as Form } from './forms';
+export { default as Sites } from './sites';

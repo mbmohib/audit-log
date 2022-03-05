@@ -4,8 +4,8 @@ export const sidebarSize = '170px';
 
 export const sideMenus = [
   {
-    label: 'Forms',
-    path: '/forms',
+    label: 'Sites',
+    path: '/sites',
   },
   {
     label: 'Audit Logs',

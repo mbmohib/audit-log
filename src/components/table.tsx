@@ -27,7 +27,8 @@ const Tbody = styled.tbody`
 `;
 
 const Td = styled.td`
-  padding: 16px 0;
+  padding: 16px 8px;
+  text-align: ${({ align }) => align || 'left'};
 `;
 
 const Tr = styled.tr``;
@@ -43,7 +44,9 @@ export default function TableExtended<T>({ rows, columns }: TableProps<T>) {
       <Thead>
         <Tr>
           {columns.map((column, index) => (
-            <Td key={index}>{column.headerName}</Td>
+            <Td align={column.align} key={index}>
+              {column.headerName}
+            </Td>
           ))}
         </Tr>
       </Thead>
@@ -52,9 +55,13 @@ export default function TableExtended<T>({ rows, columns }: TableProps<T>) {
           <Tr key={index}>
             {columns.map((column, columnIndex) =>
               column.render ? (
-                <Td key={columnIndex}>{column.render(row[column.field])}</Td>
+                <Td align={column.align} key={columnIndex}>
+                  {column.render(row[column.field])}
+                </Td>
               ) : (
-                <Td key={columnIndex}>{row[column.field]}</Td>
+                <Td align={column.align} key={columnIndex}>
+                  {row[column.field]}
+                </Td>
               ),
             )}
           </Tr>

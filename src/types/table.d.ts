@@ -1,6 +1,6 @@
 type Column<T> = {
   field: T;
   headerName: string;
-  type?: 'date';
-  render?: (item: any) => string;
+  render?: (item: any) => React.ReactNode;
+  align?: 'left' | 'right';
 };
