@@ -23,6 +23,8 @@ declare module 'styled-components' {
       black: string;
       white: string;
       gray100: string;
+      gray200: string;
+      gray400: string;
     };
   }
 }

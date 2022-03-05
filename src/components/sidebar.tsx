@@ -54,6 +54,7 @@ export default function Sidebar() {
           <NavItem
             className={({ isActive }) => (isActive ? 'active' : 'undefined')}
             to={menu.path}
+            key={menu.path}
           >
             {menu.label}
           </NavItem>

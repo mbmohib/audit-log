@@ -6,3 +6,5 @@ export { default as Image } from './image';
 export { default as Typography } from './Typography';
 export { default as Container } from './container';
 export { default as Box } from './box';
+export { default as Table } from './table';
+export { default as Paper } from './paper';
