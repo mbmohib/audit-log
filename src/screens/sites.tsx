@@ -2,11 +2,19 @@ import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { DetailsIcon } from '../assets/icons';
-import { Container, Paper, PreLoader, Table, Typography } from '../components';
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  PreLoader,
+  Table,
+  Typography,
+} from '../components';
 import { useGetSites } from '../services/site.api';
 
 const columns: Column<keyof Partial<Site>>[] = [
-  { field: 'siteId', headerName: 'Site ID' },
+  { field: 'name', headerName: 'Name' },
   {
     field: 'userName',
     headerName: 'User',
@@ -55,6 +63,9 @@ export default function AuditLog() {
   return (
     <Container>
       <PreLoader isLoading={isLoading}>
+        <Box display="flex" mb={2} justifyContent="flex-end">
+          <Link to="/sites/create">Create New</Link>
+        </Box>
         {data && data.length ? (
           <Paper>
             <Table rows={data || []} columns={columns} />

@@ -22,7 +22,7 @@ export const useGetSites = () => {
   const axios = useAxios();
 
   return useQuery<Site[], Error>(
-    'radios',
+    'sites',
     async () => {
       const { data } = await axios.get(`/sites`);
 
@@ -49,10 +49,14 @@ export const useCreateSite = () => {
     }) => axios.post(`/sites`, data),
     {
       onSuccess: data => {
-        queryClient.setQueryData('sites', sites => [
-          ...(sites as Site[]),
-          data.data,
-        ]);
+        const isExist = queryClient.getQueryData('sites');
+
+        if (isExist) {
+          queryClient.setQueryData('sites', oldData => [
+            ...(oldData as Site[]),
+            data.data,
+          ]);
+        }
       },
       onError: () => {
         //
@@ -61,18 +65,45 @@ export const useCreateSite = () => {
   );
 };
 
-export const useUpdateSites = () => {
+export const useUpdateSite = (id: string | undefined) => {
   const axios = useAxios();
+  const queryClient = useQueryClient();
 
-  return useQuery<Site[], Error>(
-    'radios',
-    async () => {
-      const { data } = await axios.get(`/sites`);
-
-      return data;
-    },
+  return useMutation(
+    ({
+      data,
+    }: {
+      data: Omit<
+        Site,
+        'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
+      >;
+    }) => axios.put(`/sites/${id}`, data),
     {
-      staleTime: 60 * 1000,
+      onSuccess: data => {
+        queryClient.setQueryData(['sites', id], () => data.data);
+        const isExist = queryClient.getQueryData('sites');
+
+        if (isExist) {
+          queryClient.setQueryData('sites', oldData => {
+            let updatedData = [];
+            if (Array.isArray(oldData)) {
+              updatedData = oldData.map(item => {
+                if (item.siteId === data.data.siteId) {
+                  return data.data;
+                }
+
+                return {
+                  ...item,
+                };
+              });
+            }
+            return updatedData;
+          });
+        }
+      },
+      onError: () => {
+        //
+      },
     },
   );
 };

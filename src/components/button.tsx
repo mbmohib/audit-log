@@ -65,6 +65,10 @@ const ButtonWrapper = styled.div<SpaceProps>`
     background-color: ${({ theme }) => theme.colors.primary200};
   }
 
+  a {
+    color: inherit;
+  }
+
   ${space}
 `;
 
@@ -72,7 +76,7 @@ type ButtonProps = SpaceProps & {
   isLoading?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
   children: React.ReactNode;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export default function Button({

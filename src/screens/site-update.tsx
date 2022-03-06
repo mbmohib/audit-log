@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
 
 import { Box, Container, Paper, PreLoader, SiteForm } from '../components';
-import { useCreateSite, useGetSite } from '../services/site.api';
+import { useGetSite, useUpdateSite } from '../services/site.api';
 
 export default function SiteCreate() {
   const { id } = useParams();
   const getSite = useGetSite(id);
-  const { mutate, isLoading } = useCreateSite();
+  const { mutate, isLoading } = useUpdateSite(id);
 
   const handleFormSubmit = (
     values: Omit<

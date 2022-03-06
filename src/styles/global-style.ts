@@ -14,4 +14,9 @@ export default createGlobalStyle`
     line-height: 1.5;
     font-family:  ${({ theme }) => theme.primaryFont};
   }
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
