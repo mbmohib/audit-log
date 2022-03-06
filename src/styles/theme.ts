@@ -36,6 +36,7 @@ const theme: DefaultTheme = {
     gray200: '#9fa2b4',
     gray400: '#DFE0EB',
     gray500: '#818181',
+    gray900: '#3d3d3d',
     error: '#d32f2f',
   },
 };

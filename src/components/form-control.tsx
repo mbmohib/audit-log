@@ -9,6 +9,7 @@ const FormWrapper = styled.div`
 
   input,
   textarea {
+    color: ${({ theme }) => theme.colors.gray900};
     height: 40px;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.gray100};

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Box, Container, Paper, SiteForm, Typography } from '../components';
 import { useCreateSite } from '../services/site.api';
 
@@ -11,11 +13,19 @@ const initialState = {
 
 export default function SiteCreate() {
   const { mutate } = useCreateSite();
+  const navigate = useNavigate();
 
   const handleFormSubmit = (values: SiteForm) => {
-    mutate({
-      data: values,
-    });
+    mutate(
+      {
+        data: values,
+      },
+      {
+        onSuccess: () => {
+          navigate('/sites');
+        },
+      },
+    );
   };
 
   return (

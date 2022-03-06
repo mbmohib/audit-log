@@ -14,7 +14,7 @@ import { useGetSite, useUpdateSite } from '../services/site.api';
 export default function SiteCreate() {
   const { id } = useParams();
   const { data, isLoading: isSiteLoading } = useGetSite(id);
-  const { mutate, isLoading } = useUpdateSite(id);
+  const { mutate, isLoading, isSuccess } = useUpdateSite(id);
 
   const handleFormSubmit = (values: SiteForm) => {
     mutate({
@@ -35,8 +35,10 @@ export default function SiteCreate() {
           <PreLoader isLoading={isSiteLoading}>
             <SiteForm
               isLoading={isLoading}
+              isSuccess={isSuccess}
               initialState={data}
               handleFormSubmit={handleFormSubmit}
+              message="Site updated successfully"
             />
 
             {data && (

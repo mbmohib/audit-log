@@ -27,6 +27,7 @@ declare module 'styled-components' {
       gray200: string;
       gray400: string;
       gray500: string;
+      gray900: string;
       error: string;
     };
   }

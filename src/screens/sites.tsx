@@ -51,12 +51,12 @@ const columns: Column<keyof Partial<Site>>[] = [
   {
     field: 'createdAt',
     headerName: 'Created at',
-    render: item => format(new Date(item), 'dd-MM-yyyy'),
+    render: item => (item ? format(new Date(item), 'dd-MM-yyyy') : ''),
   },
   {
     field: 'updatedAt',
     headerName: 'Created at',
-    render: item => format(new Date(item), 'dd-MM-yyyy'),
+    render: item => (item ? format(new Date(item), 'dd-MM-yyyy') : ''),
   },
   {
     field: 'siteId',

@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { Box, Button, TextField, Textarea } from '.';
+import { Box, Button, TextField, Textarea, Typography } from '.';
 
 const defaultState: SiteForm = {
   name: '',
@@ -15,6 +15,8 @@ const defaultState: SiteForm = {
 type SiteFormProps = {
   initialState: SiteForm | undefined;
   isLoading?: boolean;
+  isSuccess?: boolean;
+  message?: string;
   handleFormSubmit: (values: SiteForm) => void;
 };
 
@@ -22,6 +24,8 @@ export default function SiteForm({
   initialState = defaultState,
   handleFormSubmit,
   isLoading = false,
+  isSuccess,
+  message,
 }: SiteFormProps) {
   const navigate = useNavigate();
   const { handleChange, values, errors, touched, handleSubmit } = useFormik({
@@ -96,6 +100,12 @@ export default function SiteForm({
           mb={4}
         />
       </Box>
+
+      {isSuccess && (
+        <Typography color="primary" mb={2}>
+          {message}
+        </Typography>
+      )}
 
       <Box display="flex">
         <Button type="submit" isLoading={isLoading} disabled={isLoading} mt={1}>
