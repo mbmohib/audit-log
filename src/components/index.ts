@@ -11,3 +11,4 @@ export { default as PreLoader } from './pre-loader';
 export { default as TextField } from './text-field';
 export { default as Button } from './button';
 export { default as SiteForm } from './site-form';
+export { default as Textarea } from './textarea';

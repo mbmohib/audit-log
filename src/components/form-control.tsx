@@ -7,29 +7,59 @@ const FormWrapper = styled.div`
     position: relative;
   }
 
-  input {
+  input,
+  textarea {
     height: 40px;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.gray100};
     border-radius: 8px;
   }
-  input:focus {
+
+  textarea {
+    min-height: 100px;
+    padding: 16px;
+  }
+
+  input:focus,
+  textarea:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary};
   }
-  input:focus + .form-control__placeholder .form-control__label {
+
+  input:focus + .form-control__placeholder .form-control__label,
+  textarea:focus + .form-control__placeholder .form-control__label {
     background-color: white;
     font-size: 14px;
     color: ${({ theme }) => theme.colors.primary};
     transform: translate(0, -120%);
   }
-  input:not(input[value='']) + .form-control__placeholder .form-control__label {
+
+  input:not(input[value='']) + .form-control__placeholder .form-control__label,
+  textarea:not(textarea:empty)
+    + .form-control__placeholder
+    .form-control__label {
     background-color: white;
     font-size: 14px;
     color: ${({ theme }) => theme.colors.black};
     transform: translate(0, -120%);
   }
-  input:focus + .form-control__placeholder .form-control__label {
+
+  textarea:not(textarea:empty)
+    + .form-control__placeholder
+    .form-control__label {
+    transform: translate(0, -260%);
+  }
+
+  textarea:empty + .form-control__placeholder .form-control__label {
+    transform: translate(0, -140%);
+  }
+
+  textarea:focus:empty + .form-control__placeholder .form-control__label {
+    transform: translate(0, -260%);
+  }
+
+  input:focus + .form-control__placeholder .form-control__label,
+  textarea:focus + .form-control__placeholder .form-control__label {
     border-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -55,7 +85,8 @@ const FormWrapper = styled.div`
       background-color 0.2s ease-out, color 0.15s ease-out;
   }
   input,
-  .form-control__placeholder {
+  .form-control__placeholder,
+  textarea .form-control__placeholder {
     font-size: 16px;
     padding: 0 1.2rem;
   }

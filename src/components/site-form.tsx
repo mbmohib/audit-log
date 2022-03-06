@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { Box, Button, TextField } from '.';
+import { Box, Button, TextField, Textarea } from '.';
 
 const defaultState: SiteForm = {
   name: '',
@@ -66,7 +66,7 @@ export default function SiteForm({
         value={values.address}
         mb={4}
       />
-      <TextField
+      <Textarea
         isError={!!errors.description && !!touched.description}
         error={errors.description}
         label="Site Description"
