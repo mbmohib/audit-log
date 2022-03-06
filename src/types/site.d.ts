@@ -1,7 +1,7 @@
 type Site = {
   siteId: string;
-  userId: string;
-  userName: string;
+  createdBy: string;
+  lastUpdatedBy: string;
   name: string;
   address: string;
   description: string;
@@ -10,3 +10,13 @@ type Site = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+type SiteForm = Omit<
+  Site,
+  | 'siteId'
+  | 'createdBy'
+  | 'lastUpdatedBy'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'userName'
+>;

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import {
+  BordersProps,
   FlexboxProps,
   GridProps,
   LayoutProps,
   PositionProps,
   SpaceProps,
+  border,
   flexbox,
   grid,
   layout,
@@ -16,6 +18,7 @@ type BoxProps = LayoutProps &
   SpaceProps &
   FlexboxProps &
   GridProps &
+  BordersProps &
   PositionProps;
 
 const Box = styled.div<BoxProps>`
@@ -24,6 +27,7 @@ const Box = styled.div<BoxProps>`
   ${grid}
   ${flexbox}
   ${position}
+  ${border}
 `;
 
 export default Box;

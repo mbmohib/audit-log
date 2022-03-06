@@ -19,4 +19,13 @@ export default createGlobalStyle`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
   }
+
+  h1, h2,h3, h4, h5, h6, p {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  h1, h2,h3, h4, h5, h6 {
+    margin-bottom: 8px;
+  }
 `;

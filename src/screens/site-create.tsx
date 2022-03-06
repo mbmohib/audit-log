@@ -1,4 +1,4 @@
-import { Box, Container, Paper, SiteForm } from '../components';
+import { Box, Container, Paper, SiteForm, Typography } from '../components';
 import { useCreateSite } from '../services/site.api';
 
 const initialState = {
@@ -12,12 +12,7 @@ const initialState = {
 export default function SiteCreate() {
   const { mutate } = useCreateSite();
 
-  const handleFormSubmit = (
-    values: Omit<
-      Site,
-      'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
-    >,
-  ) => {
+  const handleFormSubmit = (values: SiteForm) => {
     mutate({
       data: values,
     });
@@ -26,6 +21,9 @@ export default function SiteCreate() {
   return (
     <Container>
       <Box width="600px" mx="auto">
+        <Box display="flex" mb={2} justifyContent="space-between">
+          <Typography variant="header1">Site</Typography>
+        </Box>
         <Paper>
           <SiteForm
             initialState={initialState}

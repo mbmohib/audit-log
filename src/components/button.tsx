@@ -1,26 +1,54 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SpaceProps, space } from 'styled-system';
 
-const ButtonWrapper = styled.div<SpaceProps>`
+type ButtonWrapperProps = SpaceProps & {
+  variant?: 'primary' | 'secondary';
+};
+
+const ButtonWrapper = styled.div<ButtonWrapperProps>`
   .btn {
-    background: ${({ theme }) => theme.colors.white};
-    border-color: ${({ theme }) => theme.colors.primary};
     border: 1px solid;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    padding: 16px 32px;
-    color: ${({ theme }) => theme.colors.primary};
+    padding: 10px 24px;
     border-radius: 8px;
     transition: 0.3s;
     cursor: pointer;
     position: relative;
     display: block;
+
+    ${({ variant }) =>
+      variant === 'primary' &&
+      css`
+        background: ${({ theme }) => theme.colors.white};
+        border-color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary};
+      `}
+
+    ${({ variant }) =>
+      variant === 'secondary' &&
+      css`
+        background: ${({ theme }) => theme.colors.white};
+        border-color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.black};
+      `}
   }
 
   .btn:hover {
-    background-color: ${({ theme }) => theme.colors.primary200};
-    color: ${({ theme }) => theme.colors.white};
+    ${({ variant }) =>
+      variant === 'primary' &&
+      css`
+        background-color: ${({ theme }) => theme.colors.primary200};
+        color: ${({ theme }) => theme.colors.white};
+      `}
+
+    ${({ variant }) =>
+      variant === 'secondary' &&
+      css`
+        background-color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.white};
+      `}
   }
 
   .btn:focus {
@@ -36,11 +64,23 @@ const ButtonWrapper = styled.div<SpaceProps>`
     position: absolute;
     left: calc(50% - 0.75em);
     top: calc(50% - 0.75em);
-    border: 0.15em solid ${({ theme }) => theme.colors.primary200};
+    border: 0.15em solid;
     border-right-color: white;
     border-radius: 50%;
     animation: button-animation 0.7s linear infinite;
     opacity: 0;
+
+    ${({ variant }) =>
+      variant === 'primary' &&
+      css`
+        border-color: ${({ theme }) => theme.colors.primary200};
+      `}
+
+    ${({ variant }) =>
+      variant === 'secondary' &&
+      css`
+        border-color: ${({ theme }) => theme.colors.white};
+      `}
   }
 
   @keyframes button-animation {
@@ -53,7 +93,17 @@ const ButtonWrapper = styled.div<SpaceProps>`
   }
 
   .btn.loading {
-    color: ${({ theme }) => theme.colors.primary200};
+    ${({ variant }) =>
+      variant === 'primary' &&
+      css`
+        color: ${({ theme }) => theme.colors.primary200};
+      `}
+
+    ${({ variant }) =>
+      variant === 'secondary' &&
+      css`
+        color: ${({ theme }) => theme.colors.black};
+      `}
   }
 
   .btn.loading::after {
@@ -72,11 +122,17 @@ const ButtonWrapper = styled.div<SpaceProps>`
   ${space}
 `;
 
+ButtonWrapper.defaultProps = {
+  variant: 'primary',
+};
+
 type ButtonProps = SpaceProps & {
   isLoading?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
   children: React.ReactNode;
   disabled?: boolean;
+  variant?: 'primary' | 'secondary';
+  onClick?: () => void;
 };
 
 export default function Button({
@@ -84,13 +140,16 @@ export default function Button({
   type,
   children,
   disabled,
+  variant,
+  onClick,
   ...rest
 }: ButtonProps) {
   return (
-    <ButtonWrapper {...rest}>
+    <ButtonWrapper {...rest} variant={variant}>
       <button
         type={type}
         disabled={disabled}
+        onClick={onClick}
         className={isLoading ? 'btn loading' : 'btn'}
       >
         {children}

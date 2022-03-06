@@ -39,14 +39,7 @@ export const useCreateSite = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({
-      data,
-    }: {
-      data: Omit<
-        Site,
-        'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
-      >;
-    }) => axios.post(`/sites`, data),
+    ({ data }: { data: SiteForm }) => axios.post(`/sites`, data),
     {
       onSuccess: data => {
         const isExist = queryClient.getQueryData('sites');
@@ -70,14 +63,7 @@ export const useUpdateSite = (id: string | undefined) => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({
-      data,
-    }: {
-      data: Omit<
-        Site,
-        'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
-      >;
-    }) => axios.put(`/sites/${id}`, data),
+    ({ data }: { data: SiteForm }) => axios.put(`/sites/${id}`, data),
     {
       onSuccess: data => {
         queryClient.setQueryData(['sites', id], () => data.data);

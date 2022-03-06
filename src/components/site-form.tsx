@@ -1,14 +1,10 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { Box, Button, TextField } from '.';
 
-type State = Omit<
-  Site,
-  'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
->;
-
-const defaultState: State = {
+const defaultState: SiteForm = {
   name: '',
   address: '',
   description: '',
@@ -17,9 +13,9 @@ const defaultState: State = {
 };
 
 type SiteFormProps = {
-  initialState: State | undefined;
+  initialState: SiteForm | undefined;
   isLoading?: boolean;
-  handleFormSubmit: (values: State) => void;
+  handleFormSubmit: (values: SiteForm) => void;
 };
 
 export default function SiteForm({
@@ -27,6 +23,7 @@ export default function SiteForm({
   handleFormSubmit,
   isLoading = false,
 }: SiteFormProps) {
+  const navigate = useNavigate();
   const { handleChange, values, errors, touched, handleSubmit } = useFormik({
     initialValues: initialState,
     validationSchema: Yup.object({
@@ -44,6 +41,10 @@ export default function SiteForm({
       handleFormSubmit(data);
     },
   });
+
+  const handleCancel = () => {
+    navigate('/sites');
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -96,9 +97,22 @@ export default function SiteForm({
         />
       </Box>
 
-      <Button type="submit" isLoading={isLoading} disabled={isLoading} mt={2}>
-        submit
-      </Button>
+      <Box display="flex">
+        <Button type="submit" isLoading={isLoading} disabled={isLoading} mt={1}>
+          save
+        </Button>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          disabled={isLoading}
+          mt={1}
+          ml={1}
+          variant="secondary"
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+      </Box>
     </form>
   );
 }

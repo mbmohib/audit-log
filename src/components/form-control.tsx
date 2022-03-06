@@ -8,7 +8,7 @@ const FormWrapper = styled.div`
   }
 
   input {
-    height: 50px;
+    height: 40px;
     width: 100%;
     border: 1px solid ${({ theme }) => theme.colors.gray100};
     border-radius: 8px;

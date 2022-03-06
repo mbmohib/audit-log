@@ -2,10 +2,10 @@ import { build, fake, sequence } from '@jackfranklin/test-data-bot';
 
 export const siteBuilder = build('Site', {
   fields: {
-    siteId: fake(f => f.datatype.uuid()),
-    userId: sequence(),
+    siteId: sequence(),
+    createdBy: fake(f => f.name.findName()),
+    lastUpdatedBy: fake(f => f.name.findName()),
     name: fake(f => f.company.companyName()),
-    userName: fake(f => f.name.findName()),
     address: fake(f => `${f.address.streetAddress()}, ${f.address.cityName()}`),
     description: fake(f => f.lorem.lines(3)),
     latitude: fake(f => f.address.latitude()),

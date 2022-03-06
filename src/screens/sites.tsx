@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { DetailsIcon } from '../assets/icons';
 import {
   Box,
-  Button,
   Container,
   Paper,
   PreLoader,
@@ -13,11 +13,28 @@ import {
 } from '../components';
 import { useGetSites } from '../services/site.api';
 
+const CreateButton = styled(Link)`
+  background: ${({ theme }) => theme.colors.white};
+  border-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary};
+  padding: 6px 16px;
+  border: 1px solid;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: 0.3s;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary200};
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
 const columns: Column<keyof Partial<Site>>[] = [
   { field: 'name', headerName: 'Name' },
   {
-    field: 'userName',
-    headerName: 'User',
+    field: 'createdBy',
+    headerName: 'Created By',
   },
   {
     field: 'latitude',
@@ -63,8 +80,9 @@ export default function AuditLog() {
   return (
     <Container>
       <PreLoader isLoading={isLoading}>
-        <Box display="flex" mb={2} justifyContent="flex-end">
-          <Link to="/sites/create">Create New</Link>
+        <Box display="flex" mb={2} justifyContent="space-between">
+          <Typography variant="header1">Site</Typography>
+          <CreateButton to="/sites/create">Create New</CreateButton>
         </Box>
         {data && data.length ? (
           <Paper>

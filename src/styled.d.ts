@@ -12,8 +12,8 @@ declare module 'styled-components' {
       header4: string;
       header5: string;
       paragraph: string;
-      helperText: string;
-      copyrightText: string;
+      subtitle1: string;
+      subtitle2: string;
     };
     colors: {
       primary: string;
