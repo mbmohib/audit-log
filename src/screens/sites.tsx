@@ -31,10 +31,15 @@ const CreateButton = styled(Link)`
 `;
 
 const columns: Column<keyof Partial<Site>>[] = [
-  { field: 'name', headerName: 'Site Name' },
+  {
+    field: 'name',
+    headerName: 'Site Name',
+    width: '200px',
+  },
   {
     field: 'createdBy',
     headerName: 'User',
+    width: '200px',
   },
   {
     field: 'latitude',
@@ -47,6 +52,7 @@ const columns: Column<keyof Partial<Site>>[] = [
   {
     field: 'address',
     headerName: 'Address',
+    width: '250px',
   },
   {
     field: 'createdAt',
@@ -67,6 +73,7 @@ const columns: Column<keyof Partial<Site>>[] = [
         <DetailsIcon />
       </Link>
     ),
+    width: '60px',
   },
 ];
 

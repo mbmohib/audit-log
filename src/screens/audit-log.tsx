@@ -13,19 +13,26 @@ import {
 import { useGetAuditLogs } from '../services/audit-log.api';
 
 const columns: Column<keyof Partial<AuditLog>>[] = [
-  { field: 'name', headerName: 'Site Name' },
+  {
+    field: 'name',
+    headerName: 'Site Name',
+    width: '250px',
+  },
   {
     field: 'createdBy',
     headerName: 'User',
+    width: '250px',
   },
   {
     field: 'eventName',
     headerName: 'Event Name',
+    width: '200px',
   },
   {
     field: 'createdAt',
     headerName: 'Created at',
-    render: item => format(new Date(item), 'dd-MM-yyyy'),
+    render: item => format(new Date(item), 'dd-MM-yyyy hh:mm a'),
+    width: '200px',
   },
   {
     field: 'auditId',

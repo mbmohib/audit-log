@@ -11,7 +11,7 @@ const Thead = styled.thead`
   color: ${({ theme }) => theme.colors.gray200};
 
   td {
-    padding: 8px 0;
+    padding: 8px 8px;
     padding-bottom: 32px;
   }
 `;
@@ -44,7 +44,11 @@ export default function TableExtended<T>({ rows, columns }: TableProps<T>) {
       <Thead>
         <Tr>
           {columns.map((column, index) => (
-            <Td align={column.align} key={index}>
+            <Td
+              style={{ width: column.width || '100%' }}
+              align={column.align}
+              key={index}
+            >
               {column.headerName}
             </Td>
           ))}
@@ -55,11 +59,19 @@ export default function TableExtended<T>({ rows, columns }: TableProps<T>) {
           <Tr key={index}>
             {columns.map((column, columnIndex) =>
               column.render ? (
-                <Td align={column.align} key={columnIndex}>
+                <Td
+                  style={{ width: column.width || '100%' }}
+                  align={column.align}
+                  key={columnIndex}
+                >
                   {column.render(row[column.field])}
                 </Td>
               ) : (
-                <Td align={column.align} key={columnIndex}>
+                <Td
+                  style={{ width: column.width || '100%' }}
+                  align={column.align}
+                  key={columnIndex}
+                >
                   {row[column.field]}
                 </Td>
               ),

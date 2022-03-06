@@ -3,4 +3,5 @@ type Column<T> = {
   headerName: string;
   render?: (item: any) => React.ReactNode;
   align?: 'left' | 'right';
+  width?: string;
 };
