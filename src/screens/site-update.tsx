@@ -29,7 +29,7 @@ export default function SiteCreate() {
           <Typography variant="header1">Site Details</Typography>
         </Box>
         <Paper>
-          <Typography variant="header2" as="h1" mb={3}>
+          <Typography variant="header2" as="h1" mb={4}>
             Site ID: {data?.siteId}
           </Typography>
           <PreLoader isLoading={isSiteLoading}>
@@ -46,7 +46,7 @@ export default function SiteCreate() {
                     Audit Log
                   </Typography>
                 </Box>
-                <Typography>
+                <Typography color="gray500">
                   Created by {data?.createdBy} on{' '}
                   {format(
                     new Date(data?.createdAt as Date),
@@ -54,7 +54,7 @@ export default function SiteCreate() {
                   )}
                 </Typography>
                 {data?.lastUpdatedBy && (
-                  <Typography>
+                  <Typography color="gray500">
                     Updated by {data?.lastUpdatedBy} on{' '}
                     {format(
                       new Date(data?.updatedAt as Date),
