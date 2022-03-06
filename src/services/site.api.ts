@@ -2,6 +2,22 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { useAxios } from '../hooks';
 
+export const useGetSite = (id: string | undefined) => {
+  const axios = useAxios();
+
+  return useQuery<Site, Error>(
+    ['sites', id],
+    async () => {
+      const { data } = await axios.get(`/sites/${id}`);
+
+      return data;
+    },
+    {
+      staleTime: 60 * 1000,
+    },
+  );
+};
+
 export const useGetSites = () => {
   const axios = useAxios();
 

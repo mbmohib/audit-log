@@ -6,7 +6,6 @@ const LoaderWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  position: absolute;
   min-height: 60vh;
 
   .loader {

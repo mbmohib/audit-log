@@ -8,14 +8,24 @@ type State = Omit<
   'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
 >;
 
+const defaultState: State = {
+  name: '',
+  address: '',
+  description: '',
+  latitude: '',
+  longitude: '',
+};
+
 type SiteFormProps = {
-  initialState: State;
+  initialState: State | undefined;
+  isLoading?: boolean;
   handleFormSubmit: (values: State) => void;
 };
 
 export default function SiteForm({
-  initialState,
+  initialState = defaultState,
   handleFormSubmit,
+  isLoading = false,
 }: SiteFormProps) {
   const { handleChange, values, errors, touched, handleSubmit } = useFormik({
     initialValues: initialState,
@@ -86,7 +96,7 @@ export default function SiteForm({
         />
       </Box>
 
-      <Button type="submit" isLoading={false} disabled={false} mt={2}>
+      <Button type="submit" isLoading={isLoading} disabled={isLoading} mt={2}>
         submit
       </Button>
     </form>
