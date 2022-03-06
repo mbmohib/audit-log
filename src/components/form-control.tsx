@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+import Typography from './typography';
+
 const FormWrapper = styled.div`
-  position: relative;
+  .form-control {
+    position: relative;
+  }
 
   input {
     height: 50px;
@@ -62,6 +66,8 @@ type FormControlProps = {
   id: string;
   placeholder?: string;
   label?: string;
+  error: string | undefined;
+  isError: boolean;
 };
 
 export default function FormControl({
@@ -69,17 +75,22 @@ export default function FormControl({
   id,
   placeholder,
   label,
+  error,
+  isError,
 }: FormControlProps) {
   return (
     <FormWrapper>
-      {children}
-      <label
-        className="form-control__placeholder"
-        htmlFor={id}
-        id={placeholder}
-      >
-        <div className="form-control__label">{label}</div>
-      </label>
+      <div className="form-control">
+        {children}
+        <label
+          className="form-control__placeholder"
+          htmlFor={id}
+          id={placeholder}
+        >
+          <div className="form-control__label">{label}</div>
+        </label>
+      </div>
+      {isError && <Typography color="error">{error}</Typography>}
     </FormWrapper>
   );
 }

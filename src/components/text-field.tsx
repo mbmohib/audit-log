@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { SpaceProps, space } from 'styled-system';
 
 import FormControl from './form-control';
+
+const FieldWrapper = styled.div`
+  ${space}
+`;
 
 type TextFieldProps = {
   id?: string;
@@ -8,6 +13,8 @@ type TextFieldProps = {
   type?: string;
   name: string;
   value: string;
+  isError: boolean;
+  error: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -18,16 +25,26 @@ export default function TextField({
   name,
   value,
   onChange,
-}: TextFieldProps) {
+  isError,
+  error,
+  ...rest
+}: TextFieldProps & SpaceProps) {
   return (
-    <FormControl id={id || name} label={label}>
-      <input
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-      />
-    </FormControl>
+    <FieldWrapper {...rest}>
+      <FormControl
+        id={id || name}
+        label={label}
+        isError={isError}
+        error={error}
+      >
+        <input
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      </FormControl>
+    </FieldWrapper>
   );
 }

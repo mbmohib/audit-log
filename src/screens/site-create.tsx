@@ -1,36 +1,38 @@
-import { useReducer } from 'react';
+import { Box, Container, Paper, SiteForm } from '../components';
+import { useCreateSite } from '../services/site.api';
 
-import { Container, Paper, TextField } from '../components';
-
-const initialState = { name: '', description: '', latitude: '' };
-
-function reducer(state: any, action: any) {
-  switch (action.type) {
-    case 'input':
-      return {
-        ...state,
-        name: action.payload,
-      };
-    case 'decrement':
-      return state;
-    default:
-      throw new Error();
-  }
-}
+const initialState = {
+  name: '',
+  address: '',
+  description: '',
+  latitude: '',
+  longitude: '',
+};
 
 export default function SiteCreate() {
-  const [values, dispatch] = useReducer(reducer, initialState);
+  const { mutate } = useCreateSite();
+
+  const handleFormSubmit = (
+    values: Omit<
+      Site,
+      'siteId' | 'userId' | 'createdAt' | 'updatedAt' | 'userName'
+    >,
+  ) => {
+    mutate({
+      data: values,
+    });
+  };
 
   return (
     <Container>
-      <Paper>
-        <TextField
-          label="Name"
-          name="name"
-          value={values.name}
-          onChange={e => dispatch({ type: 'input', payload: e.target.value })}
-        />
-      </Paper>
+      <Box width="600px" mx="auto">
+        <Paper>
+          <SiteForm
+            initialState={initialState}
+            handleFormSubmit={handleFormSubmit}
+          />
+        </Paper>
+      </Box>
     </Container>
   );
 }

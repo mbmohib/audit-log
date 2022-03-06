@@ -17,6 +17,7 @@ declare module 'styled-components' {
     };
     colors: {
       primary: string;
+      primary200: string;
       secondary: string;
       tertiary100: string;
       tertiary200: string;
@@ -25,6 +26,7 @@ declare module 'styled-components' {
       gray100: string;
       gray200: string;
       gray400: string;
+      error: string;
     };
   }
 }

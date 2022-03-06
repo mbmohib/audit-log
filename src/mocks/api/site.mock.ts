@@ -17,3 +17,19 @@ export const getSite = (
 
   res(ctx.status(200), ctx.json(sites.find(site => site.siteId === id)));
 };
+
+export const createSite = (
+  req: RestRequest,
+  res: ResponseComposition,
+  ctx: RestContext,
+) => {
+  res(ctx.status(201), ctx.json(req.body));
+};
+
+export const updateSite = (
+  req: RestRequest,
+  res: ResponseComposition,
+  ctx: RestContext,
+) => {
+  res(ctx.status(200), ctx.json(req.body));
+};
