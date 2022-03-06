@@ -2,7 +2,8 @@ import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import userImage from '../assets/images/user-photo.png';
+import { ArrowIcon, CalenderIcon } from '../assets/icons';
+import userImage from '../assets/images/user-photo-2.png';
 import {
   Box,
   Container,
@@ -39,25 +40,33 @@ export default function AuditLogDetails() {
           <Box display="flex" justifyContent="space-between">
             <Box>
               <Typography variant="header1">{data?.name}</Typography>
-              <Typography mt={1}>
-                Created At:{' '}
-                {data?.createdAt &&
-                  format(
-                    new Date(data?.createdAt as Date),
-                    'dd-MM-yyyy hh:mm a',
-                  )}
-              </Typography>
+              <Box display="flex" alignItems="center" mt={1}>
+                <CalenderIcon />
+                <Typography ml={1}>
+                  {data?.createdAt &&
+                    format(
+                      new Date(data?.createdAt as Date),
+                      'dd-MM-yyyy hh:mm a',
+                    )}
+                </Typography>
+              </Box>
             </Box>
             <Box display="flex" alignItems="center">
-              <Image src={userImage} mr={1} />
-              <Typography>{data?.createdBy}</Typography>
+              <Image width={40} src={userImage} mr={1} />
+              <Box>
+                <Typography variant="subtitle2" color="gray500">
+                  Created by:
+                </Typography>
+                <Typography>{data?.createdBy}</Typography>
+              </Box>
             </Box>
           </Box>
 
-          <Box mt={6}>
-            <Typography variant="header3">
-              Event Name: {data?.eventName}
+          <Box mt={6} display="flex">
+            <Typography variant="header3" mr={2} fontWeight={500}>
+              Event name:
             </Typography>
+            <Typography variant="header3">{data?.eventName}</Typography>
           </Box>
 
           <FieldWrapper>
@@ -70,10 +79,16 @@ export default function AuditLogDetails() {
           {changeKeys.length &&
             changeKeys.map(key => (
               <FieldWrapper>
-                <Typography>{key}</Typography>
-                <Typography color="gray100">{changes[key].old}</Typography>
-                <Typography>{'->'}</Typography>
-                <Typography color="primary">{changes[key].new}</Typography>
+                <Typography style={{ textTransform: 'capitalize' }}>
+                  {key}
+                </Typography>
+                <Typography color="gray500">{changes[key].old}</Typography>
+                <Typography>
+                  <ArrowIcon />
+                </Typography>
+                <Typography color="primary" fontWeight={500}>
+                  {changes[key].new}
+                </Typography>
               </FieldWrapper>
             ))}
         </PreLoader>
