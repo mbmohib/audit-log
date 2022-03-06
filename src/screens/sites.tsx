@@ -31,10 +31,10 @@ const CreateButton = styled(Link)`
 `;
 
 const columns: Column<keyof Partial<Site>>[] = [
-  { field: 'name', headerName: 'Name' },
+  { field: 'name', headerName: 'Site Name' },
   {
     field: 'createdBy',
-    headerName: 'Created By',
+    headerName: 'User',
   },
   {
     field: 'latitude',

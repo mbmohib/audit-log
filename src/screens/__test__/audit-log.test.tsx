@@ -22,7 +22,6 @@ test('render audit logs table', async () => {
   await waitFor(() => {
     auditLogs.forEach(auditLog => {
       expect(screen.getByText(auditLog.siteId));
-      expect(screen.getByText(auditLog.userId));
     });
   });
 });

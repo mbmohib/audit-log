@@ -1,60 +1,65 @@
-import { Alert, Box, Container, Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
-import { Layout } from '../components';
+import { DetailsIcon } from '../assets/icons';
+import {
+  Box,
+  Container,
+  Paper,
+  PreLoader,
+  Table,
+  Typography,
+} from '../components';
 import { useGetAuditLogs } from '../services/audit-log.api';
 
-const columns: GridColDef[] = [
-  { field: 'siteId', headerName: 'Site ID', width: 150 },
+const columns: Column<keyof Partial<AuditLog>>[] = [
+  { field: 'name', headerName: 'Site Name' },
   {
-    field: 'userId',
-    headerName: 'User ID',
-    width: 150,
+    field: 'createdBy',
+    headerName: 'User',
   },
   {
     field: 'eventName',
     headerName: 'Event Name',
-    flex: 0.7,
   },
   {
-    field: 'timestamp',
+    field: 'createdAt',
     headerName: 'Created at',
-    type: 'date',
-    flex: 1,
-    valueGetter: (params: GridValueGetterParams) =>
-      format(new Date(params.row.timestamp), 'dd-MM-yyyy hh:mm a'),
+    render: item => format(new Date(item), 'dd-MM-yyyy'),
+  },
+  {
+    field: 'auditId',
+    headerName: 'Details',
+    align: 'right',
+    render: item => (
+      <Link to={`/audit-logs/${item}`}>
+        <DetailsIcon />
+      </Link>
+    ),
   },
 ];
 
 export default function AuditLog() {
-  const { data, isError } = useGetAuditLogs();
+  const { data, isError, isLoading } = useGetAuditLogs();
 
   if (isError) {
-    return (
-      <Alert severity="error">
-        Sorry! We have hit an error! Please try again
-      </Alert>
-    );
+    return <p>Sorry! We have hit an error! Please try again</p>;
   }
 
   return (
     <Container>
-      {data && data.length ? (
-        <Box mt={8} height={400} width="100%">
-          <DataGrid
-            rows={data || []}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            getRowId={row => row.siteId}
-          />
+      <PreLoader isLoading={isLoading}>
+        <Box display="flex" mb={2} justifyContent="space-between">
+          <Typography variant="header1">Audit Logs</Typography>
         </Box>
-      ) : (
-        <Typography>No data found!</Typography>
-      )}
+        {data && data.length ? (
+          <Paper>
+            <Table rows={data || []} columns={columns} />
+          </Paper>
+        ) : (
+          <Typography>No data found!</Typography>
+        )}
+      </PreLoader>
     </Container>
   );
 }
