@@ -50,7 +50,11 @@ export default function AuditLog() {
   const { data, isError, isLoading } = useGetAuditLogs();
 
   if (isError) {
-    return <p>Sorry! We have hit an error! Please try again</p>;
+    return (
+      <Typography role="alert" color="error">
+        Sorry! We have hit an error! Please try again
+      </Typography>
+    );
   }
 
   return (

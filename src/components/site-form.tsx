@@ -13,7 +13,7 @@ const defaultState: SiteForm = {
 };
 
 type SiteFormProps = {
-  initialState: SiteForm | undefined;
+  initialState?: SiteForm | undefined;
   isLoading?: boolean;
   isSuccess?: boolean;
   message?: string;

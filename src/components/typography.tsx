@@ -80,4 +80,8 @@ const Typography = styled.p<TypographyProps>`
   ${typography}
 `;
 
+Typography.defaultProps = {
+  variant: 'paragraph',
+};
+
 export default Typography;

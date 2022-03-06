@@ -78,7 +78,7 @@ export default function AuditLogDetails() {
 
           {changeKeys.length &&
             changeKeys.map(key => (
-              <FieldWrapper>
+              <FieldWrapper key={key}>
                 <Typography style={{ textTransform: 'capitalize' }}>
                   {key}
                 </Typography>

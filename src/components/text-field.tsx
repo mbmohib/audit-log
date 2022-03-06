@@ -8,7 +8,6 @@ const FieldWrapper = styled.div`
 `;
 
 type TextFieldProps = {
-  id?: string;
   label: string;
   type?: string;
   name: string;
@@ -19,7 +18,6 @@ type TextFieldProps = {
 };
 
 export default function TextField({
-  id,
   label,
   type = 'text',
   name,
@@ -31,15 +29,10 @@ export default function TextField({
 }: TextFieldProps & SpaceProps) {
   return (
     <FieldWrapper {...rest}>
-      <FormControl
-        id={id || name}
-        label={label}
-        isError={isError}
-        error={error}
-      >
+      <FormControl id={name} label={label} isError={isError} error={error}>
         <input
           type={type}
-          id={id}
+          id={name}
           name={name}
           value={value}
           onChange={onChange}

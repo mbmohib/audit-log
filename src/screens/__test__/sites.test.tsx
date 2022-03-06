@@ -1,10 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 
-import { auditLogs } from '../../mocks/db';
+import { sites } from '../../mocks/db';
 import { server } from '../../mocks/server';
-import * as auditLogApi from '../../services/audit-log.api';
+import * as siteApi from '../../services/site.api';
 import { render } from '../../utils/test';
-import AuditLog from '../audit-log';
+import Sites from '../sites';
 
 beforeAll(() => {
   server.listen();
@@ -16,12 +16,12 @@ afterEach(() => {
   server.resetHandlers();
 });
 
-test('render audit logs table', async () => {
-  render(<AuditLog />);
+test('render sites table', async () => {
+  render(<Sites />);
 
   await waitFor(() => {
-    auditLogs.forEach(auditLog => {
-      expect(screen.getByText(auditLog.name));
+    sites.forEach(site => {
+      expect(screen.getByText(site.name));
     });
   });
 });
@@ -33,11 +33,11 @@ test('show error message if API request failed', () => {
   */
 
   // @ts-expect-error: Unreachable code error
-  jest.spyOn(auditLogApi, 'useGetAuditLogs').mockImplementation(() => ({
+  jest.spyOn(siteApi, 'useGetSites').mockImplementation(() => ({
     isError: true,
   }));
 
-  render(<AuditLog />);
+  render(<Sites />);
 
   expect(screen.getByRole('alert')).toHaveTextContent(/error/i);
 });

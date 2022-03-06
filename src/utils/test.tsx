@@ -1,5 +1,9 @@
 import { render as rtlRender } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+
+import theme from '../styles/theme';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +21,11 @@ export function render(
   }: { client?: QueryClient; rtlOptions?: object } = {},
 ) {
   const Wrapper: React.FC = ({ children }) => (
-    <QueryClientProvider client={client}>{children}</QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <QueryClientProvider client={client}>{children}</QueryClientProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 
   return { ...rtlRender(ui, { wrapper: Wrapper, ...rtlOptions }) };
