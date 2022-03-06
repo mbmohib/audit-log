@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { DetailsIcon } from '../assets/icons';
-import { Container, Paper, Table, Typography } from '../components';
+import { Container, Paper, PreLoader, Table, Typography } from '../components';
 import { useGetSites } from '../services/site.api';
 
 const columns: Column<keyof Partial<Site>>[] = [
@@ -46,7 +46,7 @@ const columns: Column<keyof Partial<Site>>[] = [
 ];
 
 export default function AuditLog() {
-  const { data, isError } = useGetSites();
+  const { data, isError, isLoading } = useGetSites();
 
   if (isError) {
     return <p>Sorry! We have hit an error! Please try again</p>;
@@ -54,13 +54,15 @@ export default function AuditLog() {
 
   return (
     <Container>
-      {data && data.length ? (
-        <Paper>
-          <Table rows={data || []} columns={columns} />
-        </Paper>
-      ) : (
-        <Typography>No data found!</Typography>
-      )}
+      <PreLoader isLoading={isLoading}>
+        {data && data.length ? (
+          <Paper>
+            <Table rows={data || []} columns={columns} />
+          </Paper>
+        ) : (
+          <Typography>No data found!</Typography>
+        )}
+      </PreLoader>
     </Container>
   );
 }

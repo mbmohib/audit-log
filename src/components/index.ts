@@ -8,3 +8,5 @@ export { default as Container } from './container';
 export { default as Box } from './box';
 export { default as Table } from './table';
 export { default as Paper } from './paper';
+export { default as PreLoader } from './pre-loader';
+export { default as TextField } from './text-field';
